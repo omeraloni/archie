@@ -12,7 +12,7 @@ def main():
     try:
         archie = Archie(host, username, password, debug_log=True)
         archie.login()
-        #archie.reboot()
+        archie.reboot()
     except Exception as err:
         print(f"Error: {err}")
 
