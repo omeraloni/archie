@@ -1,0 +1,58 @@
+2020-06-29 23:39:22,603 - archie-cli - INFO - ping google.com ttl=112 time=87.817 ms
+2020-06-29 23:39:27,719 - archie-cli - INFO - ping google.com ttl=112 time=83.557 ms
+2020-06-29 23:39:32,825 - archie-cli - INFO - ping google.com ttl=112 time=80.418 ms
+2020-06-29 23:39:37,934 - archie-cli - INFO - ping google.com ttl=112 time=86.060 ms
+2020-06-29 23:39:43,040 - archie-cli - INFO - ping google.com ttl=112 time=78.397 ms
+2020-06-29 23:39:48,148 - archie-cli - INFO - ping google.com ttl=112 time=81.636 ms
+2020-06-29 23:39:53,269 - archie-cli - INFO - ping google.com ttl=112 time=78.481 ms
+2020-06-29 23:39:58,381 - archie-cli - INFO - ping google.com ttl=112 time=84.006 ms
+2020-06-29 23:40:03,484 - archie-cli - INFO - ping google.com ttl=112 time=80.960 ms
+2020-06-29 23:40:08,589 - archie-cli - INFO - ping google.com ttl=112 time=80.834 ms
+2020-06-29 23:40:13,698 - archie-cli - INFO - ping google.com ttl=112 time=78.649 ms
+2020-06-29 23:40:18,812 - archie-cli - INFO - ping google.com ttl=112 time=83.358 ms
+2020-06-29 23:40:23,912 - archie-cli - INFO - ping google.com ttl=112 time=80.908 ms
+2020-06-29 23:40:29,023 - archie-cli - INFO - ping google.com ttl=112 time=79.994 ms
+2020-06-29 23:40:34,132 - archie-cli - INFO - ping google.com ttl=112 time=83.139 ms
+2020-06-29 23:40:39,267 - archie-cli - INFO - ping google.com ttl=112 time=105.109 ms
+2020-06-29 23:40:44,383 - archie-cli - INFO - ping google.com ttl=112 time=83.393 ms
+2020-06-29 23:40:49,496 - archie-cli - INFO - ping google.com ttl=112 time=78.734 ms
+2020-06-29 23:40:54,600 - archie-cli - INFO - ping google.com ttl=112 time=83.558 ms
+2020-06-29 23:40:59,710 - archie-cli - INFO - ping google.com ttl=112 time=82.519 ms
+2020-06-29 23:41:04,822 - archie-cli - INFO - ping google.com ttl=112 time=87.506 ms
+2020-06-29 23:41:09,935 - archie-cli - INFO - ping google.com ttl=112 time=85.416 ms
+2020-06-29 23:41:15,049 - archie-cli - INFO - ping google.com ttl=112 time=82.619 ms
+2020-06-29 23:41:20,157 - archie-cli - INFO - ping google.com ttl=112 time=82.344 ms
+2020-06-29 23:41:25,263 - archie-cli - INFO - ping google.com ttl=112 time=82.936 ms
+2020-06-29 23:41:41,304 - archie-cli - DEBUG - PING google.com (172.217.20.110): 56 data bytes
+
+--- google.com ping statistics ---
+1 packets transmitted, 0 packets received, 100.0% packet loss
+
+2020-06-29 23:41:41,305 - archie-cli - ERROR - ping failed
+2020-06-29 23:41:46,582 - archie-cli - INFO - ping google.com ttl=112 time=236.970 ms
+2020-06-29 23:41:51,692 - archie-cli - INFO - ping google.com ttl=112 time=81.021 ms
+2020-06-29 23:41:56,801 - archie-cli - INFO - ping google.com ttl=112 time=80.998 ms
+2020-06-29 23:42:01,908 - archie-cli - INFO - ping google.com ttl=112 time=79.074 ms
+2020-06-29 23:42:07,032 - archie-cli - INFO - ping google.com ttl=112 time=93.693 ms
+2020-06-29 23:42:12,152 - archie-cli - INFO - ping google.com ttl=112 time=90.307 ms
+2020-06-29 23:42:17,256 - archie-cli - INFO - ping google.com ttl=112 time=80.764 ms
+2020-06-29 23:42:22,378 - archie-cli - INFO - ping google.com ttl=112 time=85.591 ms
+2020-06-29 23:42:27,489 - archie-cli - INFO - ping google.com ttl=112 time=79.495 ms
+2020-06-29 23:42:32,610 - archie-cli - INFO - ping google.com ttl=112 time=95.909 ms
+2020-06-29 23:42:37,722 - archie-cli - INFO - ping google.com ttl=112 time=89.519 ms
+2020-06-29 23:42:42,831 - archie-cli - INFO - ping google.com ttl=112 time=81.197 ms
+2020-06-29 23:42:47,943 - archie-cli - INFO - ping google.com ttl=112 time=84.282 ms
+2020-06-29 23:42:53,048 - archie-cli - INFO - ping google.com ttl=112 time=78.399 ms
+2020-06-29 23:42:58,261 - archie-cli - INFO - ping google.com ttl=111 time=84.329 ms
+2020-06-29 23:43:03,371 - archie-cli - INFO - ping google.com ttl=111 time=83.421 ms
+2020-06-29 23:43:08,479 - archie-cli - INFO - ping google.com ttl=111 time=82.038 ms
+2020-06-29 23:43:13,596 - archie-cli - INFO - ping google.com ttl=111 time=83.377 ms
+2020-06-29 23:43:18,707 - archie-cli - INFO - ping google.com ttl=111 time=82.135 ms
+2020-06-29 23:43:23,814 - archie-cli - INFO - ping google.com ttl=111 time=80.633 ms
+2020-06-29 23:43:28,914 - archie-cli - INFO - ping google.com ttl=111 time=78.550 ms
+2020-06-29 23:43:34,028 - archie-cli - INFO - ping google.com ttl=111 time=88.153 ms
+2020-06-29 23:43:39,135 - archie-cli - INFO - ping google.com ttl=111 time=80.004 ms
+2020-06-29 23:43:44,243 - archie-cli - INFO - ping google.com ttl=111 time=84.472 ms
+2020-06-29 23:43:49,349 - archie-cli - INFO - ping google.com ttl=111 time=79.986 ms
+2020-06-29 23:43:54,457 - archie-cli - INFO - ping google.com ttl=111 time=78.474 ms
+2020-06-29 23:43:59,560 - archie-cli - INFO - ping google.com ttl=111 time=78.759 ms

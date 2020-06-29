@@ -62,7 +62,7 @@ class Archie:
                 raise Exception("Unexpected response")
 
             self.token = result.group(1)
-            self._logger.info(f"Retrieved token {self.token}")
+            self._logger.debug(f"Retrieved token {self.token}")
 
         except ValueError:
             self._logger.error(f"Unable to fetch auth token for {self.host}")
