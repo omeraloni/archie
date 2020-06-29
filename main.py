@@ -10,9 +10,9 @@ def main():
     password = os.getenv('ARCHIE_PASSWORD', default='admin')
 
     try:
-        archie = Archie(host, username, password, debug_log=True)
+        archie = Archie(host, username, password, test_mode=True)
         archie.login()
-        archie.reboot()
+        #archie.reboot()
     except Exception as err:
         print(f"Error: {err}")
 

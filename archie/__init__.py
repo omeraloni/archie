@@ -1,24 +1,28 @@
 import requests
-import requests.compat
-import hashlib
-import base64
 import re
 import logging
+from urllib.parse import quote
+from hashlib import md5
+from base64 import b64encode
 
 
 class Archie:
-    def __init__(self, host, username, password, debug_log=False):
+    def __init__(self, host, username, password, test_mode=False):
         """Initialize the scanner."""
         self.credentials = ''
         self.token = ''
         self.host = host
         self.username = username
-        self.password = password
+        self.password = md5(password.encode('utf')).hexdigest()
+
+        credentials = f"{self.username}:{self.password}".encode('utf')
+        credentials = b64encode(credentials).decode('utf')
+        self.credentials = quote(' ' + credentials)
 
         # Set up logging
         self._logger = logging.getLogger('archie')
 
-        if debug_log:
+        if test_mode:
             self._logger.setLevel(logging.DEBUG)
         else:
             self._logger.setLevel(logging.ERROR)
@@ -43,26 +47,11 @@ class Archie:
         There seems to be some sort of state machine maintained on the
         router that needs a request here first.
         '''
+
         requests.get(f"http://{self.host}")
-
-        '''
-        Generate md5 hash of password. 
-        The C7 appears to use the first 15 characters of the password only, 
-        so we truncate to remove additional characters from being hashed.
-        '''
-        password = hashlib.md5(self.password.encode('utf')).hexdigest()
-        credentials = f"{self.username}:{password}".encode('utf')
-
-        '''
-        Encode credentials to be sent as a cookie
-        '''
-        credentials = base64.b64encode(credentials).decode('utf')
-        credentials = requests.compat.quote(' ' + credentials)
-        self.credentials = credentials
+        response = self._get_response(f"http://{self.host}/userRpm/LoginRpm.htm?Save=Save")
 
         try:
-            response = self._get_response(f"http://{self.host}/userRpm/LoginRpm.htm?Save=Save")
-
             result = re.search(r'window.parent.location.href = '
                                r'"https?://.*/(.*)/userRpm/Index.htm";',
                                response.text)
