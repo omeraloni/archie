@@ -73,6 +73,7 @@ class Archie:
         self._logger.info(f"Logged in to http://{self.host} as {self.username}")
 
     def get_info(self):
+        # TODO: get router info here
         return self._get_response(f"http://{self.host}/{self.token}/userRpm/WanCfgRpm.html")
 
     def reboot(self):
