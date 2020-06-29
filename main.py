@@ -1,4 +1,4 @@
-from archie_api import ArchieAPI
+from archie import Archie
 import os
 
 
@@ -10,9 +10,9 @@ def main():
     password = os.getenv('ARCHIE_PASSWORD', default='admin')
 
     try:
-        archie = ArchieAPI(host, username, password, debug_log=True)
+        archie = Archie(host, username, password, debug_log=True)
         archie.login()
-        archie.reboot()
+        #archie.reboot()
     except Exception as err:
         print(f"Error: {err}")
 

@@ -6,7 +6,7 @@ import re
 import logging
 
 
-class ArchieAPI:
+class Archie:
     def __init__(self, host, username, password, debug_log=False):
         """Initialize the scanner."""
         self.credentials = ''
@@ -16,7 +16,7 @@ class ArchieAPI:
         self.password = password
 
         # Set up logging
-        self._logger = logging.getLogger('archie_api')
+        self._logger = logging.getLogger('archie')
 
         if debug_log:
             self._logger.setLevel(logging.DEBUG)
@@ -27,7 +27,7 @@ class ArchieAPI:
         console_logger.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
         self._logger.addHandler(console_logger)
 
-        self._logger.info("Initialized ArchieAPI")
+        self._logger.info("Initialized Archie")
 
     def _get_response(self, url, timeout=4):
         referer = f"http://{self.host}"
