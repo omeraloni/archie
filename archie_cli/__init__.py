@@ -1,10 +1,11 @@
 from .click_helpers import validate_time, validate_ip
-from .helpers import ping
+from .ping import ping
 from archie import Archie
 import logging
 import schedule
 import time
 import click
+import coloredlogs
 
 global archie, config, ping_failed, logger
 
@@ -12,15 +13,11 @@ global archie, config, ping_failed, logger
 def setup_logging():
     global logger
     logger = logging.getLogger('archie-cli')
-    logger.setLevel(logging.DEBUG)
-
-    console_logger = logging.StreamHandler()
-    console_logger.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-    console_logger.setLevel(logging.DEBUG)
-    logger.addHandler(console_logger)
+    coloredlogs.install(logger=logger, level=logging.DEBUG,
+                        fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
     file_logger = logging.FileHandler('archie.log')
-    file_logger.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    file_logger.setFormatter(logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s'))
     file_logger.setLevel(logging.DEBUG)
     logger.addHandler(file_logger)
 
@@ -34,12 +31,12 @@ def print_dot(seconds):
 
 def reboot_router_job():
     try:
-        #archie.login()
-        #archie.reboot()
-        logger.info("Router is rebooting")
-        print_dot(seconds=30)
-    except Exception as err:
-        logger.error(err)
+        archie.login()
+        archie.reboot()
+        logger.warning("Router is rebooting")
+        print_dot(seconds=60)
+    except Exception as e:
+        logger.error(e)
 
 
 def ping_google_job():
@@ -47,10 +44,17 @@ def ping_google_job():
     host = config["ping_host"]
 
     try:
-        result = ping(host)
-        logger.info(f"ping {host} ttl={result[0]} time={result[1]} ms")
-    except Exception as err:
-        logger.error(err)
+        ttl, time_ms = ping(host)
+
+        if time_ms < 100:
+            logger.info(f"ping {host} ttl={ttl} time={time_ms} ms")
+        elif time_ms < 1000:
+            logger.warning(f"ping {host} ttl={ttl} time={time_ms} ms")
+        else:
+            logger.critical(f"ping {host} ttl={ttl} time={time_ms} ms")
+
+    except Exception as e:
+        logger.error(e)
         ping_failed = ping_failed + 1
 
     '''

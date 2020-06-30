@@ -1,6 +1,7 @@
 import requests
 import re
 import logging
+import coloredlogs
 from urllib.parse import quote
 from hashlib import md5
 from base64 import b64encode
@@ -21,15 +22,13 @@ class Archie:
 
         # Set up logging
         self._logger = logging.getLogger('archie')
+        coloredlogs.install(logger=self._logger, level=logging.DEBUG,
+                            fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
         if test_mode:
             self._logger.setLevel(logging.DEBUG)
         else:
             self._logger.setLevel(logging.ERROR)
-
-        console_logger = logging.StreamHandler()
-        console_logger.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        self._logger.addHandler(console_logger)
 
         self._logger.info("Initialized Archie")
 

@@ -9,7 +9,7 @@ def ping(hostname, retries=1):
 
     if not result:
         logger = logging.getLogger('archie-cli')
-        logger.debug(output)
+        logger.error(output)
         raise Exception("ping failed")
 
-    return result.group(1), result.group(2)  # ttl, time
+    return int(result.group(1)), float(result.group(2))  # ttl, time
