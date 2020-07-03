@@ -42,23 +42,25 @@ def config_set(host, username, password, save):
 @click.command(name='show')
 @click.pass_context
 def config_show(ctx):
-    """Set router login details"""
+    """Show router login details"""
 
-    location = os.environ.get('HOME', '') + '/.config/archie'
-    if os.path.exists(location) is False:
-        print('No configuration saved')
-        ctx.abort()
-
-    os.chdir(location)
-
-    if os.path.isfile('config.json') is False:
-        print('No configuration saved')
-        ctx.abort()
-
-    with open('config.json', 'r') as file:
-        cfg = json.load(file)
-        print(cfg)
+    try:
+        print(config_get())
+    except Exception as e:
+        print(e)
 
 
 config.add_command(config_set)
 config.add_command(config_show)
+
+
+def config_get():
+    config_file = f"{os.environ.get('HOME', '')}/.config/archie/config.json"
+
+    if os.path.isfile(config_file) is False:
+        raise FileNotFoundError("Configuration file not found")
+
+    with open(config_file, 'r') as file:
+        return json.load(file)
+
+
