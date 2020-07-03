@@ -24,7 +24,7 @@ def reboot_now():
                     password=cfg["password"])
 
     archie.login()
-    # archie.reboot()
+    archie.reboot()
 
 
 @click.command(name='schedule')
