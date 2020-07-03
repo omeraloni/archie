@@ -4,7 +4,7 @@ import logging
 
 
 def ping(hostname, retries=1):
-    output = popen(' '.join(("ping", f"-c {retries}", hostname))).read()
+    output = popen(' '.join(("ping", f"-I wlan0 -c {retries}", hostname))).read()
     result = search(r'ttl=([0-9]+) time=([0-9.]+)', output)
 
     if not result:
