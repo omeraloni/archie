@@ -27,3 +27,8 @@ def validate_time(ctx, param, value):
         return value
     except ValueError:
         raise BadParameter('Time needs to be in the form of HH:MM')
+
+
+def abort_if_false(ctx, param, value):
+    if not value:
+        ctx.abort()
