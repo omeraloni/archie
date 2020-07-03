@@ -15,6 +15,9 @@ def validate_ip(ctx, param, value):
 
 
 def validate_time(ctx, param, value):
+    if value is None:
+        return
+
     try:
         result = re.fullmatch(r'(24:00|2[0-3]:[0-5][0-9]|[0-1][0-9]:[0-5][0-9])', value)
 

@@ -1,13 +1,15 @@
+import json
+import os
 from .click_helpers import validate_time, validate_ip
 from .ping import ping
-from archie import Archie
+# from archie import Archie
 import logging
 import schedule
 import time
 import click
 import coloredlogs
 
-global archie, config, ping_failed, logger
+global archie, logger
 
 
 def setup_logging():
@@ -64,6 +66,127 @@ def ping_google_job():
     '''
 
 
+def abort_if_false(ctx, param, value):
+    if not value:
+        ctx.abort()
+
+
+@click.group()
+@click.option('--debug/--no-debug', default=False)
+@click.pass_context
+def cli(ctx, debug):
+    """TP-Link Archer C7 CLI"""
+
+    # ensure that ctx.obj exists and is a dict (in case `cli()` is called
+    # by means other than the `if` block below)
+    ctx.ensure_object(dict)
+    ctx.obj['debug'] = debug
+
+    setup_logging()
+
+
+@click.group(name='config')
+def config():
+    """Configure router login details"""
+    pass
+
+
+@click.command(name='set')
+@click.option('--host', hidden=True, default='192.168.0.1', envvar='ARCHIE_HOSTNAME', help='Router\'s IP address',
+              prompt='Router\'s IP address', callback=validate_ip, show_default=True)
+@click.option('--username', hidden=True, default='admin', envvar='ARCHIE_USERNAME', help='Router\'s admin user name',
+              prompt='Router\'s admin user name', show_default=True)
+@click.option('--password', hidden=True, default='admin', envvar='ARCHIE_PASSWORD',
+              help='Router\'s admin user password',
+              prompt='Router\'s admin user password', show_default=True, hide_input=True, confirmation_prompt=True)
+@click.option('--save', is_flag=True, default=True, hidden=True, prompt='Save', callback=abort_if_false)
+@click.pass_context
+def config_set(host, username, password, save):
+    """Set router login details"""
+
+    location = os.environ.get('HOME', '') + '/.config/archie'
+
+    if os.path.exists(location) is False:
+        os.mkdir(location)
+
+    os.chdir(location)
+    with open('config.json', 'w') as file:
+        cfg = {
+            'host': host,
+            'username': username,
+            'password': password
+        }
+
+        json.dump(cfg, file)
+        print('Saved!')
+
+
+@click.command(name='show')
+@click.pass_context
+def config_show():
+    """Set router login details"""
+
+    location = os.environ.get('HOME', '') + '/.config/archie'
+    if os.path.exists(location) is False:
+        print('No configuration saved')
+        ctx.abort()
+
+    os.chdir(location)
+
+    if os.path.isfile('config.json') is False:
+        print('No configuration saved')
+        ctx.abort()
+
+    with open('config.json', 'r') as file:
+        cfg = json.load(file)
+        print(cfg)
+
+
+config.add_command(config_set)
+config.add_command(config_show)
+
+
+@click.command(name='watchdog')
+@click.option('--host', default='google.com', help='Hostname to ping')
+@click.option('--period', default=10, help='Watchdog period (seconds)', type=click.IntRange(1), )
+def watchdog(host, period):
+    """Install a watchdog cron job"""
+
+    logger.info(host, period)
+    pass
+
+
+@click.group(name='reboot')
+def reboot():
+    """Reboot"""
+
+    pass
+
+
+@click.command(name="now")
+def reboot_now():
+    """Reboot router"""
+
+    print('Reboot router')
+
+
+@click.command(name='schedule')
+@click.argument('time', default=None, callback=validate_time)
+def reboot_schedule(time):
+    """Schedule router reboot"""
+
+    print('schedule a cron job', time)
+
+
+reboot.add_command(reboot_now)
+reboot.add_command(reboot_schedule)
+
+cli.add_command(config)
+cli.add_command(watchdog)
+cli.add_command(reboot)
+
+
+'''
 @click.command()
 @click.option('--host',         default='192.168.0.1',  envvar='ARCHIE_HOSTNAME',   help='Archer\'s IP address',
               callback=validate_ip)
@@ -102,3 +225,4 @@ def archie_cli(host, username, password, ping_host, ping_period, reboot):
     while True:
         schedule.run_pending()
         time.sleep(1)
+'''
