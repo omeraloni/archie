@@ -1,15 +1,17 @@
+import subprocess
 from os import popen
 from re import search
-import logging
 
 
 def ping(hostname, retries=1):
-    output = popen(' '.join(("ping", f"-I wlan0 -c {retries}", hostname))).read()
+
+    command = ["ping", f"-c {retries}", hostname]
+    output, err = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+    output = output.decode('utf-8')
+    err = err.decode('utf-8').rstrip('\n')
+
+    if err:
+        raise Exception(err)
+
     result = search(r'ttl=([0-9]+) time=([0-9.]+)', output)
-
-    if not result:
-        logger = logging.getLogger('archie-cli')
-        logger.error(output)
-        raise Exception("ping failed")
-
     return int(result.group(1)), float(result.group(2))  # ttl, time

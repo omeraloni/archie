@@ -8,9 +8,9 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.24.0"
-schedule = "^0.6.0"
 click = "^7.1.2"
 coloredlogs = "^14.0"
+python-crontab = "^2.5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"
