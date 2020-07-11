@@ -15,10 +15,11 @@ def reboot():
 
 
 @click.command(name="now")
-def reboot_now():
+@click.pass_context
+def reboot_now(ctx):
     """Reboot router"""
 
-    archie_reboot()
+    archie_reboot(ctx.obj['debug'])
 
 
 @click.group(name='schedule')

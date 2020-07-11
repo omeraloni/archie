@@ -6,8 +6,6 @@ from .config import config
 from .reboot import reboot
 from .watchdog import watchdog
 
-global debug_mode
-
 
 def setup_logging():
     logger = logging.getLogger('archie-cli')
@@ -22,17 +20,15 @@ def setup_logging():
 
 @click.group()
 @click.option('--debug', is_flag=True, default=False)
-@click.version_option(version=None)
+@click.version_option(version=None)  # FIXME: only works if installed via pip, why?
 @click.pass_context
 def cli(ctx, debug):
     """TP-Link Archer C7 CLI"""
-    global debug_mode
 
     # ensure that ctx.obj exists and is a dict (in case `cli()` is called
     # by means other than the `if` block below)
     ctx.ensure_object(dict)
     ctx.obj['debug'] = debug
-    debug_mode = debug
 
     setup_logging()
 

@@ -3,10 +3,9 @@ import os
 import logging
 
 from .archie import Archie
-from .cli import debug_mode
 
 
-def archie_reboot():
+def archie_reboot(debug_mode=False):
 
     cfg = config_read()
 
@@ -16,7 +15,7 @@ def archie_reboot():
     logging.getLogger('archie-cli').warning("Router is rebooting")
 
 
-def archie_test_login():
+def archie_test_login(debug_mode=False):
 
     cfg = config_read()
 

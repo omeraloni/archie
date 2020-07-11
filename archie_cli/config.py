@@ -34,10 +34,11 @@ def config_show():
 
 
 @click.command(name='test', hidden=True)
-def config_test():
+@click.pass_context
+def config_test(ctx):
     """Test router login details"""
 
-    archie_test_login()
+    archie_test_login(ctx.obj['debug'])
 
 
 config.add_command(config_set)
