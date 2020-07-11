@@ -1,0 +1,3 @@
+[console_scripts]
+cli = archie_cli.cli:cli
+

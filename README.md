@@ -10,6 +10,7 @@ Yes, it's an overkill... 🙃
 ## Install
 ```
 cd archie-cli
+poetry install
 poetry build
 pip install dist/archie_cli-...-py3-none-any.whl
 ```
