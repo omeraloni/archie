@@ -35,7 +35,10 @@ archie watchdog disable
 See additional options by running `archie --help`.
 
 # TODO
-- [] Implement watchdog service.  
+- [ ] Save hashed password.
+- [ ] Implement watchdog service.
+- [ ] Add tests.
+  
 
 
 
