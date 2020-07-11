@@ -1,10 +1,7 @@
-import logging
-
 import click
 
-from .archie import Archie
 from .helpers import validate_ip, abort_if_false
-from .functions import config_read, config_write
+from .methods import config_read, config_write, archie_test_login
 
 
 @click.group(name='config')
@@ -27,8 +24,7 @@ def config_set(host, username, password, save):
 
 
 @click.command(name='show')
-@click.pass_context
-def config_show(ctx):
+def config_show():
     """Show router login details"""
 
     try:
@@ -38,19 +34,10 @@ def config_show(ctx):
 
 
 @click.command(name='test', hidden=True)
-@click.pass_context
-def config_test(ctx):
+def config_test():
     """Test router login details"""
 
-    logger = logging.getLogger('archie-cli')
-    cfg = config_read()
-
-    archie = Archie(host=cfg["host"],
-                    username=cfg["username"],
-                    password=cfg["password"])
-
-    archie.login()
-    logger.info(f"Your token is {archie.token}")
+    archie_test_login()
 
 
 config.add_command(config_set)

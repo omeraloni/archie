@@ -3,7 +3,7 @@ import time
 import click
 
 from .ping import ping
-from .functions import archie_reboot
+from .methods import archie_reboot
 
 
 @click.group(name='watchdog')

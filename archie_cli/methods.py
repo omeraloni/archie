@@ -3,19 +3,26 @@ import os
 import logging
 
 from .archie import Archie
+from .cli import debug_mode
 
 
 def archie_reboot():
-    logger = logging.getLogger('archie-cli')
+
     cfg = config_read()
 
-    archie = Archie(host=cfg["host"],
-                    username=cfg["username"],
-                    password=cfg["password"])
-
+    archie = Archie(host=cfg["host"], username=cfg["username"], password=cfg["password"], debug_mode=debug_mode)
     archie.login()
-    # archie.reboot()
-    logger.warning("Router is rebooting")
+    archie.reboot()
+    logging.getLogger('archie-cli').warning("Router is rebooting")
+
+
+def archie_test_login():
+
+    cfg = config_read()
+
+    archie = Archie(host=cfg["host"], username=cfg["username"], password=cfg["password"], debug_mode=debug_mode)
+    archie.login()
+    logging.getLogger('archie-cli').info(f"Logged-in, token is {archie.token}")
 
 
 def config_write(host, username, password):

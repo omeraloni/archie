@@ -1,17 +1,15 @@
 import click
 import logging
 import coloredlogs
-import pkg_resources
 
 from .config import config
 from .reboot import reboot
 from .watchdog import watchdog
 
-global logger
+global debug_mode
 
 
 def setup_logging():
-    global logger
     logger = logging.getLogger('archie-cli')
     coloredlogs.install(logger=logger, level=logging.DEBUG,
                         fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
@@ -28,11 +26,13 @@ def setup_logging():
 @click.pass_context
 def cli(ctx, debug):
     """TP-Link Archer C7 CLI"""
+    global debug_mode
 
     # ensure that ctx.obj exists and is a dict (in case `cli()` is called
     # by means other than the `if` block below)
     ctx.ensure_object(dict)
     ctx.obj['debug'] = debug
+    debug_mode = debug
 
     setup_logging()
 

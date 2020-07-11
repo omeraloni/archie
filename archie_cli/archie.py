@@ -9,7 +9,6 @@ from base64 import b64encode
 
 class Archie:
     def __init__(self, host, username, password, debug_mode=False):
-        """Initialize the scanner."""
         self.credentials = ''
         self.token = ''
         self.host = host

@@ -1,11 +1,10 @@
-import logging
 import os
 import re
 import click
 from crontab import CronTab
 
 from .helpers import validate_time
-from .functions import archie_reboot
+from .methods import archie_reboot
 
 
 @click.group(name='reboot')
