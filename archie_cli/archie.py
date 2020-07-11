@@ -8,7 +8,7 @@ from base64 import b64encode
 
 
 class Archie:
-    def __init__(self, host, username, password, test_mode=False):
+    def __init__(self, host, username, password, debug_mode=False):
         """Initialize the scanner."""
         self.credentials = ''
         self.token = ''
@@ -25,7 +25,7 @@ class Archie:
         coloredlogs.install(logger=self._logger, level=logging.DEBUG,
                             fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
-        if test_mode:
+        if debug_mode:
             self._logger.setLevel(logging.DEBUG)
         else:
             self._logger.setLevel(logging.ERROR)

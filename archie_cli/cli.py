@@ -1,6 +1,8 @@
 import click
 import logging
 import coloredlogs
+import pkg_resources
+
 from .config import config
 from .reboot import reboot
 from .watchdog import watchdog
@@ -22,6 +24,7 @@ def setup_logging():
 
 @click.group()
 @click.option('--debug', is_flag=True, default=False)
+@click.version_option(version=None)
 @click.pass_context
 def cli(ctx, debug):
     """TP-Link Archer C7 CLI"""

@@ -2,7 +2,7 @@ import json
 import os
 import logging
 
-from archie import Archie
+from .archie import Archie
 
 
 def archie_reboot():

@@ -1,5 +1,4 @@
 import subprocess
-from os import popen
 from re import search
 
 
@@ -13,5 +12,9 @@ def ping(hostname, retries=1):
     if err:
         raise Exception(err)
 
-    result = search(r'ttl=([0-9]+) time=([0-9.]+)', output)
-    return int(result.group(1)), float(result.group(2))  # ttl, time
+    try:
+        result = search(r'ttl=([0-9]+) time=([0-9.]+)', output)
+        return int(result.group(1)), float(result.group(2))  # ttl, time
+    except ValueError:
+        raise Exception('ping: failed to parse output')
+

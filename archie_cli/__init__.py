@@ -1,12 +1,7 @@
-# from .ping import ping
-# from archie import Archie
-# import schedule
-
-#global archie, logger
-from .cli import cli
+#from .cli import cli
 
 
-
+# cli(obj={})
 
 
 # def print_dot(seconds):
