@@ -60,5 +60,5 @@ def config_read():
         return json.load(file)
 
 
-def config_check(password):
+def config_check_password(password):
     return md5(password.encode('utf')).hexdigest() == config_read()['password']

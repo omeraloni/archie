@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "archie-cli"
-version = "0.1.12"
+version = "0.1.15"
 description = "TP-Link Archer C7 CLI"
 authors = ["Omer Aloni <omeraloni@gmail.com>"]
 license = "MIT"
