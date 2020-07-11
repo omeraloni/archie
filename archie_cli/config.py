@@ -1,7 +1,7 @@
 import click
 
 from .helpers import validate_ip, abort_if_false
-from .methods import config_read, config_write, archie_test_login
+from .methods import config_read, config_write, archie_test_login, config_check
 
 
 @click.group(name='config')
@@ -41,8 +41,18 @@ def config_test(ctx):
     archie_test_login(ctx.obj['debug'])
 
 
+@click.command(name='check', hidden=True)
+@click.option('--password', hidden=True,
+              prompt='What is your admin user password', hide_input=True, confirmation_prompt=True)
+def config_check(password):
+    """Check router password validity"""
+
+    print('Your password is correct' if config_check(password) else 'your password is incorrect')
+
+
 config.add_command(config_set)
 config.add_command(config_show)
 config.add_command(config_test)
+config.add_command(config_check)
 
 

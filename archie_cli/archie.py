@@ -3,7 +3,6 @@ import re
 import logging
 import coloredlogs
 from urllib.parse import quote
-from hashlib import md5
 from base64 import b64encode
 
 
@@ -13,7 +12,7 @@ class Archie:
         self.token = ''
         self.host = host
         self.username = username
-        self.password = md5(password.encode('utf')).hexdigest()
+        self.password = password
 
         credentials = f"{self.username}:{self.password}".encode('utf')
         credentials = b64encode(credentials).decode('utf')
@@ -57,7 +56,7 @@ class Archie:
             if not result:
                 self._logger.error(f"Unable to fetch auth token for {self.host}")
                 self._logger.debug(f"Response: {response.content}")
-                raise Exception("Unexpected response")
+                raise ValueError("Unexpected response")
 
             self.token = result.group(1)
             self._logger.debug(f"Retrieved token {self.token}")

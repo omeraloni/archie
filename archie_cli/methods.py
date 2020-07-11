@@ -2,6 +2,7 @@ import json
 import os
 import logging
 
+from hashlib import md5
 from .archie import Archie
 
 
@@ -20,8 +21,12 @@ def archie_test_login(debug_mode=False):
     cfg = config_read()
 
     archie = Archie(host=cfg["host"], username=cfg["username"], password=cfg["password"], debug_mode=debug_mode)
-    archie.login()
-    logging.getLogger('archie-cli').info(f"Logged-in, token is {archie.token}")
+
+    try:
+        archie.login()
+        logging.getLogger('archie-cli').info(f"Logged-in, token is {archie.token}")
+    except ValueError as e:
+        logging.getLogger('archie-cli').error(e)
 
 
 def config_write(host, username, password):
@@ -38,7 +43,7 @@ def config_write(host, username, password):
         cfg = {
             'host': host,
             'username': username,
-            'password': password
+            'password': md5(password.encode('utf')).hexdigest()
         }
 
         json.dump(cfg, file)
@@ -53,3 +58,7 @@ def config_read():
 
     with open(config_file, 'r') as file:
         return json.load(file)
+
+
+def config_check(password):
+    return md5(password.encode('utf')).hexdigest() == config_read()['password']
