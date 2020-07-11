@@ -12,7 +12,7 @@ def setup_logging():
     coloredlogs.install(logger=logger, level=logging.DEBUG,
                         fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
-    file_logger = logging.FileHandler('archie.log')
+    file_logger = logging.FileHandler('logs/archie.log')
     file_logger.setFormatter(logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s'))
     file_logger.setLevel(logging.DEBUG)
     logger.addHandler(file_logger)

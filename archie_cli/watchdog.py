@@ -12,9 +12,9 @@ def watchdog():
 
 
 @click.command(name='install')
-@click.option('--host', hidden=True, default='google.com',
+@click.option('--host', default='google.com',
               prompt='Hostname to ping', show_default=True)
-@click.option('--period', hidden=True, default=60, type=click.IntRange(1),
+@click.option('--period', default=60, type=click.IntRange(1),
               prompt='Watchdog period (seconds)', show_default=True)
 def watchdog_install(host, period):
     """Install watchdog service"""

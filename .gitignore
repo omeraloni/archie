@@ -1,5 +1,5 @@
 .idea/
 __pycache__/
 dist/
+logs/
 .DS_Store
-*.log
