@@ -7,6 +7,13 @@ I made this app so I can schedule a reboot using cron, and practice Poetry and s
 
 Yes, it's an overkill... 🙃  
 
+## Prerequisites 
+
+Install Poetry: 
+```
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
+```  
+
 ## Install
 ```
 cd archie-cli

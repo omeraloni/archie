@@ -2,5 +2,6 @@
 __pycache__/
 dist/
 logs/
+*.egg-info/
 .DS_Store
 *.log
