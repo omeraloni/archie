@@ -30,14 +30,14 @@ def archie_test_login(debug_mode=False):
 
 
 def config_write(host, username, password):
-    location = f"{os.environ.get('HOME')}/.config/archie"
+    path = f"{os.environ.get('HOME')}/.config/archie"
 
-    if os.path.exists(location) is False:
-        os.mkdir(location)
+    if os.path.exists(path) is False:
+        os.mkdir(path)
 
-    os.chdir(location)
+    os.chdir(path)
 
-    config_file = f"{location}/config.json"
+    config_file = f"{path}/config.json"
 
     with open(config_file, 'w') as file:
         cfg = {

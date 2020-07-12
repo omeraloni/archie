@@ -1,3 +1,5 @@
+import os
+
 import click
 import logging
 import coloredlogs
@@ -7,15 +9,21 @@ from .reboot import reboot
 from .watchdog import watchdog
 
 
-def setup_logging():
+def setup_logging(debug):
     logger = logging.getLogger('archie-cli')
     coloredlogs.install(logger=logger, level=logging.DEBUG,
                         fmt='%(asctime)s %(name)s[%(process)d] %(levelname)s %(message)s')
 
-    file_logger = logging.FileHandler('logs/archie.log')
-    file_logger.setFormatter(logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s'))
-    file_logger.setLevel(logging.DEBUG)
-    logger.addHandler(file_logger)
+    if debug:
+        path = "logs"
+
+        if os.path.exists(path) is False:
+            os.mkdir(path)
+
+        file_logger = logging.FileHandler(f"{path}/archie-cli.log")
+        file_logger.setFormatter(logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s'))
+        file_logger.setLevel(logging.DEBUG)
+        logger.addHandler(file_logger)
 
 
 @click.group()
@@ -30,7 +38,7 @@ def cli(ctx, debug):
     ctx.ensure_object(dict)
     ctx.obj['debug'] = debug
 
-    setup_logging()
+    setup_logging(debug)
 
 
 cli.add_command(config)
