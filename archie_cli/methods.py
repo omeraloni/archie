@@ -1,6 +1,7 @@
 import json
 import os
 import logging
+import subprocess
 
 from hashlib import md5
 from .archie import Archie
@@ -39,11 +40,16 @@ def config_write(host, username, password):
 
     config_file = f"{path}/config.json"
 
+    # get the absolute path of ping command to overcome cron environment issues
+    output, err = subprocess.Popen(["which", "ping"], stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+    ping_cmd = output.decode('utf-8').rstrip('\n')
+
     with open(config_file, 'w') as file:
         cfg = {
             'host': host,
             'username': username,
-            'password': md5(password.encode('utf')).hexdigest()
+            'password': md5(password.encode('utf')).hexdigest(),
+            'ping_cmd': ping_cmd
         }
 
         json.dump(cfg, file)
