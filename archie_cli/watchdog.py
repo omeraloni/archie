@@ -33,7 +33,7 @@ def watchdog_install(interface, host, period, save):
     for job in jobs:
         cron.remove(job)
 
-    job = cron.new(command=f"archie-cli watchdog run --interface={interface} --host={host}c")
+    job = cron.new(command=f"archie-cli watchdog run --interface={interface} --host={host}")
 
     job.minute.every(period)
     cron.write()
@@ -79,7 +79,7 @@ def watchdog_run(interface, host):
 
     while retries < 3:
         try:
-            ttl, time_ms = ping(host)
+            ttl, time_ms = ping(interface, host)
 
             if time_ms < 100:
                 logger.info(f"ping {host} ttl={ttl} time={time_ms} ms")
