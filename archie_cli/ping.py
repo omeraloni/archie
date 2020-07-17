@@ -4,11 +4,11 @@ from re import search
 from .methods import config_read
 
 
-def ping(hostname, retries=1):
+def ping(interface, hostname='google.com', retries=1):
 
     ping_cmd = config_read()["ping_cmd"]
 
-    command = [f"{ping_cmd}", f"-c {retries}", hostname]
+    command = [f"{ping_cmd}", f"-I {interface}" if interface is not None else "", f"-c {retries}", hostname]
     output, err = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
     output = output.decode('utf-8')
     err = err.decode('utf-8').rstrip('\n')
