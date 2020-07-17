@@ -3,7 +3,7 @@
 > TP-Link Archer C7 command line interface
   
 Wi-Fi routers tend to get stuck occasionally.  
-I made this app so I can schedule a reboot using cron, and practice Poetry and some Python modules such as re, such as Click and CronTab.  
+I made this app so I can schedule a reboot using cron, and practice Poetry and some Python modules such as re, Click and CronTab.  
 
 Yes, it's an overkill... 🙃  
 
