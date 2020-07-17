@@ -1,6 +1,6 @@
 # Archie CLI
 
-> TP-Link Archer C7 CLI
+> TP-Link Archer C7 command line interface
   
 Wi-Fi routers tend to get stuck occasionally.  
 I made this app so I can schedule a reboot using cron, and practice Poetry and some Python modules such as re, such as Click and CronTab.  
@@ -27,17 +27,20 @@ pip install dist/archie_cli-...-py3-none-any.whl
 # set router login details
 archie config set
 
+# show config
+archie config show
+
 # reboot
 archie reboot now
 
 # schedule a reboot for 5AM
 archie reboot schedule set 05:00
 
-# install a watchdog service (TODO) 
-archie watchdog install --host=google.com --period=120
+# install a watchdog service (ping google.com every 2min over wlan0) 
+archie watchdog install --interface=wlan0 --host=google.com --period=2
 
-# disable watchdog (TODO)
-archie watchdog disable
+# disable watchdog
+archie watchdog uninstall
 ```
 
 See additional options by running `archie --help`.
@@ -46,6 +49,7 @@ See additional options by running `archie --help`.
 - [x] Save hashed password.
 - [ ] Implement watchdog service.
 - [ ] Add tests.
+- [ ] Hanlde cron environment issues.
   
 
 
